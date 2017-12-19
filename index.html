@@ -40,231 +40,359 @@
     <p id="click"> click here to change </p>
     <script>
 
-		var value = 'stack';
+var value = 'stack';
 
-		var data=[{name:"Shihuahuaco",value:1067,china:772},{name:"Cachimbo",value:283,china:1},{name:"Estoraque",value:204,china:150},{name:"Cumala",value:154,china:0},{name:"Ishpingo",value:108,china:3},{name:"Huayruro",value:108,china:1},{name:"Tornillo",value:61,china:4},{name:"Congona",value:54,china:0},{name:"Capirona",value:37,china:5},{name:"Tahuari",value:33,china:14},{name:"Marupa",value:33,china:1},{name:"Quinilla",value:28,china:4},{name:"Azucar huayo",value:22,china:15},{name:"Protium sp.",value:19,china:0},{name:"Nogal",value:15,china:6},{name:"Ana Caspi",value:14,china:2},{name:"Cedro",value:14,china:0},{name:"Carapa guianensis",value:12,china:0},{name:"Leche caspi",value:12,china:0},{name:"Andiroba",value:11,china:0},{name:"Copaiba",value:7,china:4},{name:"Palo baston",value:6,china:0},{name:"Moena",value:5,china:0},{name:"Almendro",value:5,china:0},{name:"Chancaquero",value:4,china:0},{name:"Caimitillo",value:3,china:1},{name:"Nogal amarillo",value:3,china:0},{name:"Couma macrocarpa",value:3,china:0},{name:"Tulpay",value:3,china:0},{name:"Carapa",value:3,china:0},{name:"Dacryodes olivifera",value:2,china:0},{name:"Capinuri",value:2,china:2},{name:"Brosimum alicastrum",value:2,china:0},{name:"Paramachaerium ormosioide",value:2,china:0},{name:"Brosimum sp.",value:2,china:0},{name:"Manchinga",value:2,china:0}];
-			
-		var points = [{'lon': 105.3, 'lat':33.5, 'name': 'China', 'GTF': 1024, "ID":"CHN"},
-                  {'lon': -70.9, 'lat': 18.8, 'name': 'Dominican Republic', 'GTF': 470, "ID":"DOM"},
-                  {'lon': -101, 'lat': 38, 'name': 'USA', 'GTF': 248,"ID":"USA"},
-                  {'lon': -102.5, 'lat': 22.7, 'name': 'Mexico', 'GTF': 220, "ID":"MEX"},
-                  {'lon': 2.98, 'lat': 46, 'name': 'France', 'GTF': 85, "ID":"FRA"}];
-		
-		var margin = {top: 20, right: 30, bottom: 150, left: 60},
-			widthB = 700 - margin.left - margin.right,
-			heightB = 500 - margin.top - margin.bottom;
- 
-		
-	
-		var dataIntermediate=['value','china'].map(function(key,i){
-			return data.map(function(d,j){
-				return {x: d['name'], y: d[key] };
-			})
-		})
+var data = [{
+  name: "Shihuahuaco",
+  value: 1067,
+  china: 772
+}, {
+  name: "Cachimbo",
+  value: 283,
+  china: 1
+}, {
+  name: "Estoraque",
+  value: 204,
+  china: 150
+}, {
+  name: "Cumala",
+  value: 154,
+  china: 0
+}, {
+  name: "Ishpingo",
+  value: 108,
+  china: 3
+}, {
+  name: "Huayruro",
+  value: 108,
+  china: 1
+}, {
+  name: "Tornillo",
+  value: 61,
+  china: 4
+}, {
+  name: "Congona",
+  value: 54,
+  china: 0
+}, {
+  name: "Capirona",
+  value: 37,
+  china: 5
+}, {
+  name: "Tahuari",
+  value: 33,
+  china: 14
+}, {
+  name: "Marupa",
+  value: 33,
+  china: 1
+}, {
+  name: "Quinilla",
+  value: 28,
+  china: 4
+}, {
+  name: "Azucar huayo",
+  value: 22,
+  china: 15
+}, {
+  name: "Protium sp.",
+  value: 19,
+  china: 0
+}, {
+  name: "Nogal",
+  value: 15,
+  china: 6
+}, {
+  name: "Ana Caspi",
+  value: 14,
+  china: 2
+}, {
+  name: "Cedro",
+  value: 14,
+  china: 0
+}, {
+  name: "Carapa guianensis",
+  value: 12,
+  china: 0
+}];
 
-		var dataStackLayout = d3.layout.stack()(dataIntermediate);
- 
-		
+var points = [{
+  'lon': 105.3,
+  'lat': 33.5,
+  'name': 'China',
+  'GTF': 1024,
+  "ID": "CHN"
+}, {
+  'lon': -70.9,
+  'lat': 18.8,
+  'name': 'Dominican Republic',
+  'GTF': 470,
+  "ID": "DOM"
+}, {
+  'lon': -101,
+  'lat': 38,
+  'name': 'USA',
+  'GTF': 248,
+  "ID": "USA"
+}, {
+  'lon': -102.5,
+  'lat': 22.7,
+  'name': 'Mexico',
+  'GTF': 220,
+  "ID": "MEX"
+}, {
+  'lon': 2.98,
+  'lat': 46,
+  'name': 'France',
+  'GTF': 85,
+  "ID": "FRA"
+}];
 
-		var svgBar = d3.select("#chart").append("svg")
-			.attr("width", widthB + margin.left + margin.right)
-			.attr("height", heightB + margin.top + margin.bottom)
-		
-		var gBar = svgBar.append("g")
-			.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-			.attr('class', 'gBar');
+var margin = {
+    top: 20,
+    right: 30,
+    bottom: 150,
+    left: 60
+  },
+  widthB = 700 - margin.left - margin.right,
+  heightB = 500 - margin.top - margin.bottom;
 
+var dataIntermediate = ['value', 'china'].map(function(key, i) {
+  return data.map(function(d, j) {
+    return {
+      x: d['name'],
+      y: d[key]
+    };
+  })
+})
 
+var dataStackLayout = d3.layout.stack()(dataIntermediate);
 
-		var x = d3.scale.ordinal()
-			.rangeRoundBands([0, widthB], .2);
+var svgBar = d3.select("#chart").append("svg")
+  .attr("width", widthB + margin.left + margin.right)
+  .attr("height", heightB + margin.top + margin.bottom)
 
-		var y = d3.scale.linear()
-			.range([heightB, 0]);
+var gBar = svgBar.append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+  .attr('class', 'gBar');
 
-		var xAxis = d3.svg.axis()
-			.scale(x)
-			.orient("bottom");
+var x = d3.scale.ordinal()
+  .rangeRoundBands([0, widthB], .2);
 
-		var yAxis = d3.svg.axis()
-			.scale(y)
-			.orient("left")
-			.ticks(8)
-			.tickFormat(function (d) {
-					return y.tickFormat(4,d3.format(",d"))(d)
-			});
+var y = d3.scale.linear()
+  .range([heightB, 0]);
 
-			
-		data.forEach(function(d){
-		  d.value = +d.value; // coerce to number
-		  d.china = +d.china; 
-		 });
-	 
-		x.domain(dataStackLayout[0].map(function (d) {
-			return d.x;
-		}));
- 
+var xAxis = d3.svg.axis()
+  .scale(x)
+  .orient("bottom");
 
-		y.domain([0, d3.max(dataStackLayout[dataStackLayout.length - 1],
-					function (d) { return d.y0 + d.y;})]).nice();
- 
-		var layer;
-		
-		// this part 
-		var bars;
-		
-		
-		gBar.append("g")
-				.attr("class", "axis")
-				.attr("transform", "translate(0," + (heightB+10) + ")")
-				.call(xAxis)
-					.selectAll("text")	
-					.style('font-size','14px')
-					.style('font-family','Alegreya')
-					.style("text-anchor", "end")
-					.attr("dx", "-0.40em")
-					.attr("dy", ".10em")
-					.attr("transform", function(d) {
-						return "rotate(-65)" 
-					});
-			
-		 gBar.append("g")
-			  .attr("class", "y axis")
-			  .call(yAxis)
-			  .selectAll("text")	
-					.style('font-size','16px')
-					.style('font-family','Alegreya');
-		
-		
-		
-		
-			
-					
-		function draw(){
-			if (value == 'stack'){
-				layer = gBar.selectAll(".stack")
-				.data(dataStackLayout);
-			
-			layer.exit()
-				.transition()
-				.delay(function(d,i){ return 30*i; }) 
-				.duration(1500)
-				.style("fill","none")
-				.remove();
-			
-			layer.enter().append("g")
-				.attr("class", "stack")
-				.style("fill", function (d, i) {
-					return i==0?'#b4d5c3':'#ecaeb3';
-				});
-				
-					
-          
-          	bars = layer.selectAll("rect")
-				.data(function (d) {
-					return d;
-				});
-          
-            bars.exit()
-				.transition()
-				.delay(function(d,i){ return 30*i; }) 
-				.duration(1500)
-				.attr("y", y(0))
-				.attr("height", heightB - y(0))
-				.style('fill-opacity', 1e-6)
-				.remove();
-          
-          	bars.enter().append("rect")
-          		.transition()
-          		.delay(function(d,i){ return 30*i; }) 
- 				.duration(3000)
-				.attr("x", function (d) {
-					return x(d.x);
-				})
-				.attr("y", function (d) {
-						return y(d.y + d.y0);
+var yAxis = d3.svg.axis()
+  .scale(y)
+  .orient("left")
+  .ticks(8)
+  .tickFormat(function(d) {
+    return y.tickFormat(4, d3.format(",d"))(d)
+  });
 
-				})
-				.attr("height", function (d) {
-						return y(d.y0) - y(d.y + d.y0);
+data.forEach(function(d) {
+  d.value = +d.value; // coerce to number
+  d.china = +d.china;
+});
 
-				})
-				.attr("width", x.rangeBand());
-				
-				
-			// the "UPDATE" set:
-		  bars.transition().delay(function(d,i){ return 30*i; }).duration(1500).attr("x", function(d) { return x(d.x); }) // (d) is one item from the data array, x is the scale object from above
-			.attr("width", x.rangeBand()) // constant, so no callback function(d) here
-			.attr("y", function(d) { return y(d.y + d.y0); })
-			.attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); });
-				
-			}else{
-			
-				x.domain(points.map(function (d) {
-					return d.name;
-				}));
- 
+x.domain(dataStackLayout[0].map(function(d) {
+  return d.x;
+}));
 
-				y.domain([0, 1024]).nice();
- 
-		
-		// this part 
-				bars = layer.selectAll("rect")
-						.data(points);
-						
-						
-				 bars.exit()
-				.transition()
-				.delay(function(d,i){ return 30*i; }) 
-				.duration(1500)
-				.attr("y", y(0))
-				.attr("height", heightB - y(0))
-				.style('fill-opacity', 1e-6)
-				.remove();
-          
-          	bars.enter().append("rect")
-          		.transition()
-          		.delay(function(d,i){ return 30*i; }) 
- 				.duration(3000)
-				.attr("x", function (d) {
-					return x(d.name);
-				})
-				.attr("y", function (d) {
-						return y(d.GTF);
+y.domain([0, d3.max(dataStackLayout[dataStackLayout.length - 1],
+  function(d) {
+    return d.y0 + d.y;
+  })]).nice();
 
-				})
-				.attr("height", function (d) {
-						return heightB - y(d.GTF); ;
+var layer;
 
-				})
-				.attr("width", x.rangeBand());
-				
-			
-			// the "UPDATE" set:
-		  bars.transition().delay(function(d,i){ return 30*i; }).duration(1500).attr("x", function(d) { return x(d.name); }) // (d) is one item from the data array, x is the scale object from above
-			.attr("width", x.rangeBand()) // constant, so no callback function(d) here
-			.attr("y", function(d) { return y(d.GTF); })
-			.attr("height", function(d) { return heightB - y(d.GTF); });
-			
-			}
-		
-		}
-		
-		
-		window.onload = draw();
+// this part 
+var bars;
+
+var gX = gBar.append("g")
+  .attr("class", "axis")
+  .attr("transform", "translate(0," + (heightB + 10) + ")");
+  
+var gY = gBar.append("g")
+			  .attr("class", "y axis");
+
+function draw() {
+  if (value == 'stack') {
+
+    x.domain(dataStackLayout[0].map(function(d) {
+      return d.x;
+    }));
+
+    y.domain([0, d3.max(dataStackLayout[dataStackLayout.length - 1],
+      function(d) {
+        return d.y0 + d.y;
+      })]).nice();
+
+    layer = gBar.selectAll(".stack")
+      .data(dataStackLayout);
+
+    layer.exit()
+      .transition()
+      .delay(function(d, i) {
+        return 30 * i;
+      })
+      .duration(1500)
+      .style("fill", "none")
+      .remove();
+
+    layer.enter().append("g")
+      .attr("class", "stack")
+      .style("fill", function(d, i) {
+        return i == 0 ? '#b4d5c3' : '#ecaeb3';
+      });
+
+    bars = layer.selectAll("rect")
+      .data(function(d) {
+        return d;
+      });
+
+    bars.exit()
+      .transition()
+      .delay(function(d, i) {
+        return 30 * i;
+      })
+      .duration(1500)
+      .attr("y", y(0))
+      .attr("height", heightB - y(0))
+      .style('fill-opacity', 1e-6)
+      .remove();
+
+    bars.enter().append("rect")
+      .transition()
+      .delay(function(d, i) {
+        return 30 * i;
+      })
+      .duration(3000)
+      .attr("x", function(d) {
+        return x(d.x);
+      })
+      .attr("y", function(d) {
+        return y(d.y + d.y0);
+      })
+      .attr("height", function(d) {
+        return y(d.y0) - y(d.y + d.y0);
+      })
+      .attr("width", x.rangeBand());
 
 
-		$("#click").on('click', function(){
-			
-			if(value == 'stack'){
-				value = 'bar';
-			}else{
-				value = 'stack';
-			}
-			
-			draw();
-		
-		});
+    // the "UPDATE" set:
+    bars.transition().delay(function(d, i) {
+        return 30 * i;
+      }).duration(1500).attr("x", function(d) {
+        return x(d.x);
+      }) // (d) is one item from the data array, x is the scale object from above
+      .attr("width", x.rangeBand()) // constant, so no callback function(d) here
+      .attr("y", function(d) {
+        return y(d.y + d.y0);
+      })
+      .attr("height", function(d) {
+        return y(d.y0) - y(d.y + d.y0);
+      })
+      .style("fill-opacity", 1);
+
+    gX.transition().duration(300).call(xAxis)
+      .selectAll("text")
+      .style('font-size', '14px')
+      .style('font-family', 'Alegreya')
+      .style("text-anchor", "end")
+      .attr("dx", "-0.40em")
+      .attr("dy", ".10em")
+      .attr("transform", function(d) {
+        return "rotate(-65)"
+      });
+
+	gY.transition().duration(300).call(yAxis)
+		.selectAll("text")	
+		.style('font-size','16px')
+		.style('font-family','Alegreya');
+
+  } else {
+
+    x.domain(points.map(function(d) {
+      return d.name;
+    }));
+
+    y.domain([0, 1024]).nice();
+
+    // this part 
+    bars = layer.selectAll("rect")
+      .data(points);
+
+    bars.exit()
+      .transition()
+      .delay(function(d, i) {
+        return 30 * i;
+      })
+      .duration(1500)
+      .attr("y", y(0))
+      .attr("height", heightB - y(0))
+      .style('fill-opacity', 1e-6)
+      .remove();
+
+    bars.enter().append("rect")
+      .transition()
+      .delay(function(d, i) {
+        return 30 * i;
+      })
+      .duration(3000)
+      .attr("x", function(d) {
+        return x(d.name);
+      })
+      .attr("y", function(d) {
+        return y(d.GTF);
+
+      })
+      .attr("height", function(d) {
+        return heightB - y(d.GTF);;
+
+      })
+      .attr("width", x.rangeBand());
+
+    // the "UPDATE" set:
+    bars.transition().delay(function(d, i) {
+        return 30 * i;
+      }).duration(1500).attr("x", function(d) {
+        return x(d.name);
+      }) // (d) is one item from the data array, x is the scale object from above
+      .attr("width", x.rangeBand()) // constant, so no callback function(d) here
+      .attr("y", function(d) {
+        return y(d.GTF);
+      })
+      .attr("height", function(d) {
+        return heightB - y(d.GTF);
+      });
+
+    gX.transition().duration(300).call(xAxis);
+    
+    gY.transition().duration(300).call(yAxis);
+
+  }
+
+}
+
+window.onload = draw();
+
+
+$("#click").on('click', function() {
+
+  if (value == 'stack') {
+    value = 'bar';
+  } else {
+    value = 'stack';
+  }
+
+  draw();
+
+});
 		
 		
 
